@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>如何使浮动元素居中</title>
+<style>
+		a{
+			text-decoration: none;
+		}
+		#div{
+			width: 1000px;
+			height: 500px;
+			border: 1px solid black;
+			margin: 0 auto;         /* div水平居中 */
+			background: gray;
+			text-align: center;
+			position: relative;
+		}
+		#div-float1{
+			width: 200px;
+			height: 100px;
+			line-height: 100px;
+			background: red;
+			border: 1px solid black;
+			float: left;
+			position: absolute;
+			left: 50%;
+			margin-left: -100px;
+		}
+		#div-float2{
+			width: 200px;
+			height: 100px;
+			line-height: 100px;
+			background: green;
+			border: 1px solid black;
+			float: left;
+			position: absolute;
+			top: 50%;
+			margin-top: -50px;
+		}
+		#div-float3{
+			width: 200px;
+			height: 100px;
+			line-height: 100px;
+			background: yellow;
+			border: 1px solid black;
+			float: left;
+			position: absolute;
+			left: 50%;
+			margin-left: -100px;
+			top: 50%;
+			margin-top: -50px;
+		}		
+	</style>
+</head>
+<body>
+	<div id="div">
+		<div id="div-float1">水平居中</div>
+		<div id="div-float2">垂直居中</div>
+		<div id="div-float3">水平垂直居中</div>	
+	</div>	
+</body>
+</html>
