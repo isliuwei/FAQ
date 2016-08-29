@@ -1,0 +1,18 @@
+#container {
+  width: 400px;
+  height: 500px; }
+  #container .title {
+    height: 30px;
+    line-height: 30px;
+    background: #000;
+    color: #fff;
+    padding: 0px 5px;
+    cursor: pointer; }
+  #container .content {
+    background: #ccc;
+    padding: 5px 10px;
+    display: none;
+    transition: all ease-in 10s;
+    -webkit-transition: all ease-in 10s; }
+
+/*# sourceMappingURL=demo.css.map */

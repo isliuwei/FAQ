@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body id="body">
+
+<!-- <button id="btn">按钮</button> -->
+<button id="click">点击</button>
+
+<script>
+    //var oBtn = document.getElementById('btn');
+    var oBody = document.getElementById('body');
+    var oClick = document.getElementById('click');
+    //console.log(oClick);
+
+
+//  var createButton =  {
+//     name: this.name,
+//     init: function(){
+//         var btn = document.createElement('button');
+//         btn.innerText = this.name;
+//         oBody.appendChild(btn);
+//     }
+// } 
+
+// var createButton = function(name)
+// {
+//     name = this.name;
+
+// }
+// createButton.init
+
+
+    // Btn.prototype.clickEvent = function(){
+    //         alert('haha');
+    // }
+
+    // var oBtn = new Btn('按钮');
+    // oClick.onclick = function(){
+    //     oBtn.clickEvent();
+    // }
+
+
+
+    var oBtn = {
+        name: '按钮',
+        init: function(){
+            var _btn = document.createElement('button');
+            _btn.innerText = this.name;
+            oBody.appendChild(_btn);
+        },
+        clickEvent: function(){
+            alert('I am a button');
+        }
+    }
+
+    oBtn.init();
+    oClick.onclick = function(){
+        oBtn.clickEvent();
+        //console.log("haha");
+    }
+
+
+    
+</script> 
+</body>
+</html>

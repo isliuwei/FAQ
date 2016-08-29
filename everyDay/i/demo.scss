@@ -1,0 +1,21 @@
+#container{
+  width: 400px;
+  height: 500px;
+  .title{
+    height: 30px;
+    line-height: 30px;
+    background: #000;
+    color: #fff;
+    padding: 0px 5px;
+    cursor: pointer;
+  }
+  .content{
+    background: #ccc;
+    //height: 0;
+    padding: 5px 10px;
+    display: none;
+    transition: all ease-in 10s;
+		-webkit-transition: all ease-in 10s;
+
+  }
+}

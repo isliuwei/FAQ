@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+  <div class="" id="container">
+    <div class="title" onselectstart="return false">
+      折叠菜单
+    </div>
+    <div class="content">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos iure eveniet pariatur, voluptatibus repudiandae veniam dolores, impedit eaque eos velit minima nesciunt officia voluptatum perspiciatis fugit, culpa quaerat id sed.
+    </div>
+  </div>
+<script>
+  var oC = document.getElementById('container');
+  //var oT = document.getElementsByClassName('title');
+  //var oCo = document.getElementsByClassName('content');
+  var oT = document.querySelector('.title');
+  var oC = document.querySelector('#container');
+  var oCo = document.querySelector('.content');
+  oT.onclick = function()
+  {
+    if(oCo.style.display === 'block'){
+      oCo.style.display = 'none';
+    }else{
+      oCo.style.display = 'block';
+    }
+
+  }
+
+
+
+</script>
+</body>
+</html>

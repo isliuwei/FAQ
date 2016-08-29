@@ -64,7 +64,7 @@ function clear()
 function mulBase(num,base)
 {
     var s = new Stack();
-    
+
     do{
       s.push(num%base);
       num = Math.floor(num/base);
@@ -92,12 +92,3 @@ function mulBase(num,base)
 console.log(mulBase(125,8));
 
 //console.log(Array.from(mulBase(125,8).dataStore).reverse().join(""));
-
-
-
-
-
-
-
-
-

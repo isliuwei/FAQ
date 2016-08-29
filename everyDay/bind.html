@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body id="body">
+
+<script>
+    var oBody = document.getElementById('body');
+    var oBtn = document.createElement('button');
+    var oBtn1 = document.createElement('button');
+    oBtn.innerText = "按钮 Click oBtn.name = 'oBtn'";
+    oBtn1.innerText = "按钮1 Click oBtn1.name = 'oBtn1'";
+    oBody.appendChild(oBtn);
+    oBody.appendChild(oBtn1);
+    oBtn.name = "oBtn";
+    oBtn1.name = "oBtn1";
+    var obj = {
+        name: 'lisi',
+        fn1: function(){
+
+            oBtn.onclick = function(){
+                console.log(this === oBtn);
+                console.log(this.name);
+                // this ---->  oBtn
+            }
+
+        },
+        fn2: function(){
+            console.log(this);
+        },
+        fn3: function(){
+            console.log(this.name);
+        },
+        fn4: function(){
+
+            oBtn1.onclick = function(){
+                console.log(this === obj);
+                console.log(this.name);
+            }.bind(this);
+            //this ----> obj
+            //debugger;
+
+        }
+    };
+    obj.fn1();
+    //obj.fn2();
+    //obj.fn3();
+    obj.fn4();
+</script>   
+</body>
+</html>
