@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>BOM 浏览器对象模型</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+<body>
+
+<pre class="bg-primary">
+	<h1>BOM</h1>
+	BOM的核心对象是 window,它表示浏览器的一个实例。
+	全局作用域中声明的变量、函数都会成为window对象的属性和方法。
+	全局变量和window对象的区别：
+	全局变量不能通过delete操作符删除，而直接在window对象上定义的属性可以。
+
+	<h4>窗口位置</h4>
+
+	窗口相对屏幕左边的位置
+	screenLeft
+	screenX
+	
+	窗口相对屏幕上边的位置
+	screenTop
+	screenY
+
+	窗口移动
+	moveTo()  两个参数：接收窗口新位置的x和y坐标值
+	moveBy()  两个参数：接收的是在水平和垂直方向上移动的像素值。
+
+	<h4>窗口大小</h4>
+
+	视口(viewport)大小
+	标准浏览器：
+	document.documentElement.Height
+	document.documentElement.Width
+	IE6混杂模式：
+	document.body.Height
+	document.body.Width
+
+	调整浏览器窗口大小
+	resizeTo()  两个参数：接收浏览器窗口新宽度和新高度。
+	resizeBy()  两个参数：接收新窗口与原窗口的宽度和高度之差。
+
+
+
+
+
+
+
+
+
+</pre>
+
+
+
+<script src="js/jquery-1.11.3.min.js"></script>	
+<script src="js/bootstrap.min.js"></script>
+<script>
+	var age = 23;
+	window.name = "lisi";
+	console.log(age);
+	console.log(name);
+	delete age;
+	delete name;
+	console.log(age);
+	//console.log(name);	//Uncaught ReferenceError: name is not defined
+	console.log(window.screenX);
+	console.log(window.screenLeft);
+	console.log(window.screenY);
+	console.log(window.screenTop);
+	//window.moveBy(0,100);
+	//window.moveTo(100,100);
+
+
+	console.log(document.documentElement.clientWidth);
+	console.log(document.documentElement.clientHeight);
+	console.log(document.body.clientWidth);
+	console.log(document.body.clientHeight);
+
+	//window.resizeBy(0,100);
+	//window.resizeTo(100,100);
+
+	console.log(window.location);
+
+
+	function parseQueryString()
+	{
+	  var str = window.location.search.length > 0 ? window.location.search.substring(1) : "";
+	  var args = {};
+
+	  itemsArr = str.length ? str.split("&") : [];
+
+	  var item = null;
+	  var key = null;
+	  var value = null;
+
+	  
+	  for( var i = 0; i < itemsArr.length; i++)
+	  {
+	  	item = itemsArr[i].split("=");
+	  	key = decodeURIComponent(item[0]);
+	  	value = decodeURIComponent(item[1]);
+	  	args[key] = value;
+	  }
+	  
+
+	  /*使用 Iterator方法
+	  
+		  itemsArr.forEach(function(item,index,array){
+
+		  	item = item.split("=");
+		  	key = decodeURIComponent(item[0]);
+		  	value = decodeURIComponent(item[1]);
+		  	args[key] = value;
+
+		  });
+	  */
+
+
+	  return args;
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</script>			
+</body>
+</html>
