@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>requireJS</title>
+
+</head>
+<style>
+	/*.red{
+		background: red;
+	}
+	.yellow{
+		background: yellow;
+	}*/
+	ul{
+		list-style-type: none;
+		width: 500px;
+	}
+	ul li{
+		margin-bottom: 2px;
+		padding: 3px;
+	}
+</style>
+<body>
+	<pre>
+		用requireJS编写组件
+		生成一个隔行变色的列表
+		参数：列表行数。奇数行颜色。偶数行颜色
+
+		demo:
+
+		Ul.init(
+			{
+				num: 11,
+				odd: '#f60',
+				even: '#5cb85c',
+				color: '#fff'
+			}
+		);
+
+
+	</pre>
+
+<button id="btn1">生成带参数的</button>
+<br>
+<button id="btn2">生成默认</button>
+
+
+
+
+
+
+
+<script src="require.js" data-main="index"></script>
+</body>
+</html>
