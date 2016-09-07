@@ -1,0 +1,12 @@
+var idx = lunr(function () {
+this.field('title', 10)
+this.field('tags', 100)
+this.field('body')
+
+this.ref('cid')
+
+this.pipeline.add(function () {
+  // some custom pipeline function
+})
+
+})
