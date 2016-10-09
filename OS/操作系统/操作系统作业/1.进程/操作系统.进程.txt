@@ -1,0 +1,194 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+#include<string.h>
+typedef struct PCB
+{
+    char name[10];
+	struct PCB *next;
+}PCB;
+char name[10][10];
+int x=0;
+PCB *head=NULL,*exe=NULL,*blocked=NULL;
+//创建进程//
+void creat()
+{
+	int i;
+    PCB *p=(PCB *)malloc(sizeof(PCB));
+    PCB *p1;
+ A: printf("\n请输入进程名：");
+    scanf("%s",p->name);
+    for(i=0;i<10;i++)
+	{
+		if(strcmp(name[i],p->name)==0)
+		{
+            printf("进程名已存在，请修改!");
+			goto A;
+		}
+	}
+    strcpy(name[x],p->name);
+    x++;
+    while(head==NULL)
+    {
+        head=p;
+        p->next=NULL;
+    }
+    p1=head;
+    while(p1->next!=NULL)
+	{
+		p1=p1->next;
+	}
+     p1->next=p;
+     p->next=NULL;
+}
+//执行进程//
+void execute()
+{
+    if(exe==NULL&&head!=NULL)
+    {
+        PCB *p;
+		p=head;
+		exe=p;
+        head=head->next;
+        exe->next=NULL;
+    }
+}
+//时间片到//
+void time()
+{
+    PCB *p,*p1;
+    if(exe==NULL)
+    printf("当前操作无效!");
+    else
+    {
+       if(head==NULL)//只有一个进程
+        {
+            p=head;
+            head=exe;
+            head->next=p;
+            exe=NULL;
+        }
+        else p1=head;
+        while(p1->next!=NULL)
+		{
+			p1=p1->next;
+		}
+        p=p1->next;
+        p1->next=exe;
+        exe->next=p;
+        exe=NULL;
+    }
+}
+//阻塞进程//
+void block()
+{
+    if(exe==NULL)
+	{
+        printf("当前无正在执行进程，操作无效!\n");
+		system("pause");
+	}
+    else
+    {
+        PCB *p;
+        p=blocked;
+        blocked=exe;
+        blocked->next=p;
+        exe=NULL;
+    }
+}
+//唤醒进程//
+void wakeup()
+{
+    PCB *p1,*p2,*t;
+    if(blocked==NULL)
+	{
+       printf("当前无进程阻塞，操作无效!\n");
+	   system("pause");
+	}
+    else
+    {
+        p1=blocked;
+        if(blocked->next==NULL)//阻塞态有一个
+        {
+            t=p1;
+            blocked=NULL;
+        }
+        else
+        {
+            while(p1->next->next!=NULL)//阻塞态不只一个
+			{
+				 p1=p1->next;
+			}
+			t=p1->next;
+            p1->next=NULL;
+        }
+        p2=head;
+        if(head==NULL)//只有一个进程
+        {
+            head=t;
+            t->next=NULL;
+        }
+        else//当前就绪态不止一个，则指针下移
+        {
+            while(p2->next!=NULL)
+			{
+				p2=p2->next;
+			}
+            p2->next=t;
+            t->next=NULL;
+        }
+    }
+}
+//进程结束//
+void end()
+{
+    PCB *p;int i=0,f=0;
+    p=exe;
+    exe=NULL;
+    for(i=0;i<10&&f==0;i++)
+	{
+		if(strcmp(name[i],p->name)==0)
+		{
+			strcpy(name[i],"");
+			f=1;
+		}
+	}
+    free(p);
+}
+//显示进程//
+void show(PCB *p0)
+{
+    PCB *p;
+    p=p0;
+	while(p!=NULL)
+	{
+		printf("%3s ",p->name);
+		p=p->next;
+	}
+}
+//主函数//
+int main()
+{
+    while(1)
+    {
+        system("cls");
+        printf("\n\n创建进程-------c\t\t\n");
+        printf("时间片到-------t\t就绪的进程");show(head);
+        printf("\n进程阻塞-------b\t执行的进程");show(exe);
+        printf("\n唤醒进程-------w\t阻塞的进程");show(blocked);
+		printf("\n释放进程-------e\t\t ");
+        printf("\n结束进程-------q\t\t\n");
+		printf("请选择要执行的操作:");
+		switch(getch())
+        {
+            case 'c':creat();break;
+            case 't':time();break;
+            case 'b':block();break;
+            case 'w':wakeup();break;
+            case 'e':end();break;
+            case 'q':exit(0);
+        }
+        execute();
+    }
+    return 0;
+}

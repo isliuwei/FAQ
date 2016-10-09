@@ -1,0 +1,214 @@
+P
+Error: There is no ready process.
+W
+Error: No block process.
+B
+Error: No process executing.
+C
+Create process A success
+E
+Error: No process executing.
+W
+Error: No block process.
+E
+Error: No process executing.
+C
+Create process B success
+E
+Error: No process executing.
+B
+Error: No process executing.
+E
+Error: No process executing.
+C
+Create process C success
+B
+Error: No process executing.
+W
+Error: No block process.
+B
+Error: No process executing.
+B
+Error: No process executing.
+E
+Error: No process executing.
+W
+Error: No block process.
+E
+Error: No process executing.
+P
+W
+Error: No block process.
+P
+Error: Process A is executing
+B
+Block process A success.
+P
+B
+Block process B success.
+B
+Error: No process executing.
+W
+W
+B
+Error: No process executing.
+P
+W
+Error: No block process.
+P
+Error: Process C is executing
+P
+Error: Process C is executing
+W
+Error: No block process.
+W
+Error: No block process.
+E
+End process C success.
+C
+Create process C success
+C
+Create process D success
+W
+Error: No block process.
+C
+Create process E success
+C
+Create process F success
+C
+Create process G success
+W
+Error: No block process.
+P
+C
+Create process H success
+P
+Error: Process A is executing
+B
+Block process A success.
+C
+Create process I success
+W
+P
+W
+Error: No block process.
+P
+Error: Process B is executing
+P
+Error: Process B is executing
+E
+End process B success.
+E
+Error: No process executing.
+P
+P
+Error: Process C is executing
+P
+Error: Process C is executing
+W
+Error: No block process.
+P
+Error: Process C is executing
+W
+Error: No block process.
+P
+Error: Process C is executing
+C
+Create process B success
+E
+End process C success.
+W
+Error: No block process.
+W
+Error: No block process.
+B
+Error: No process executing.
+B
+Error: No process executing.
+C
+Create process C success
+E
+Error: No process executing.
+B
+Error: No process executing.
+E
+Error: No process executing.
+B
+Error: No process executing.
+E
+Error: No process executing.
+C
+Create process J success
+W
+Error: No block process.
+P
+W
+Error: No block process.
+C
+Error: Can not create process, no resource.
+B
+Block process D success.
+C
+Error: Can not create process, no resource.
+B
+Error: No process executing.
+E
+Error: No process executing.
+W
+E
+Error: No process executing.
+P
+B
+Block process E success.
+P
+P
+Error: Process F is executing
+B
+Block process F success.
+W
+W
+C
+Error: Can not create process, no resource.
+B
+Error: No process executing.
+W
+Error: No block process.
+E
+Error: No process executing.
+P
+E
+End process G success.
+W
+Error: No block process.
+P
+C
+Create process G success
+W
+Error: No block process.
+W
+Error: No block process.
+C
+Error: Can not create process, no resource.
+B
+Block process H success.
+P
+B
+Block process I success.
+W
+W
+W
+Error: No block process.
+P
+B
+Block process A success.
+C
+Error: Can not create process, no resource.
+W
+W
+Error: No block process.
+E
+Error: No process executing.
+B
+Error: No process executing.
+W
+Error: No block process.

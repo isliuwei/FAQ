@@ -1,0 +1,2 @@
+此文件记录了进程演示程序的命令使用的情况。分别如下：
+You have successfully create a new memory!
