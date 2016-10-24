@@ -183,6 +183,183 @@ class Admin_model extends CI_Model {
     }
 
 
+
+    public function save_carousel_by_all($carousel_name,$carousel_desc,$carousel_url)
+    {
+
+
+        $data = array(
+            'carousel_name' => $carousel_name,
+            'carousel_desc' => $carousel_desc,
+            'carousel_url' => $carousel_url
+        );
+
+        $this -> db -> insert('t_carousel',$data);
+        return $this -> db -> affected_rows();
+
+    }
+
+
+
+    public function get_carousel_by_id($id)
+    {
+
+        return $this -> db -> get_where('t_carousel',array('carousel_id' => $id)) -> row();
+
+    }
+
+    public function update_carousel_by_all($carousel_id,$carousel_name,$carousel_desc,$url)
+    {
+
+
+        $data = array(
+            'carousel_name' => $carousel_name,
+            'carousel_desc' => $carousel_desc,
+            'carousel_url' => $url
+        );
+
+        $this -> db -> where('carousel_id', $carousel_id);
+        $this -> db -> update('t_carousel', $data);
+        return $this -> db -> affected_rows();
+
+    }
+
+
+
+    public function delete_carousel_by_id($carousel_id)
+    {
+        $this -> db -> delete('t_carousel', array('carousel_id' => $carousel_id));
+        return $this -> db -> affected_rows();
+
+    }
+
+
+
+
+
+    public function get_aderImage()
+    {
+        return $this -> db -> get('t_aderImage') -> result();
+    }
+
+
+
+
+    public function save_aderImage_by_all($aderImage_name,$aderImage_desc,$aderImage_url)
+    {
+
+
+
+        $data = array(
+            'aderImage_name' => $aderImage_name,
+            'aderImage_desc' => $aderImage_desc,
+            'aderImage_url' => $aderImage_url
+        );
+
+        $this -> db -> insert('t_aderImage',$data);
+        return $this -> db -> affected_rows();
+
+    }
+
+
+    
+
+
+    public function get_aderImage_by_id($id)
+    {
+
+        return $this -> db -> get_where('t_aderImage',array('aderImage_id' => $id)) -> row();
+
+    }
+
+
+    public function update_aderImage_by_all($aderImage_id,$aderImage_name,$aderImage_desc,$url)
+    {
+
+
+        $data = array(
+            'aderImage_name' => $aderImage_name,
+            'aderImage_desc' => $aderImage_desc,
+            'aderImage_url' => $url
+        );
+
+        $this -> db -> where('aderImage_id', $aderImage_id);
+        $this -> db -> update('t_aderImage', $data);
+        return $this -> db -> affected_rows();
+
+    }
+
+
+    public function delete_aderImage_by_id($aderImage_id)
+    {
+        $this -> db -> delete('t_aderImage', array('aderImage_id' => $aderImage_id));
+        return $this -> db -> affected_rows();
+
+    }
+
+
+    public function get_loginImage()
+    {
+        return $this -> db -> get('t_loginImage') -> result();
+    }
+
+
+
+    public function save_loginImage_by_all($loginImage_name,$loginImage_desc,$loginImage_url)
+    {
+
+
+
+        $data = array(
+            'loginImage_name' => $loginImage_name,
+            'loginImage_desc' => $loginImage_desc,
+            'loginImage_url' => $loginImage_url
+        );
+
+        $this -> db -> insert('t_loginImage',$data);
+        return $this -> db -> affected_rows();
+
+    }
+
+
+
+
+    public function get_loginImage_by_id($id)
+    {
+
+        return $this -> db -> get_where('t_loginImage',array('loginImage_id' => $id)) -> row();
+
+    }
+
+
+    public function update_loginImage_by_all($loginImage_id,$loginImage_name,$loginImage_desc,$url)
+    {
+
+
+        $data = array(
+            'loginImage_name' => $loginImage_name,
+            'loginImage_desc' => $loginImage_desc,
+            'loginImage_url' => $url
+        );
+
+        $this -> db -> where('loginImage_id', $loginImage_id);
+        $this -> db -> update('t_loginImage', $data);
+        return $this -> db -> affected_rows();
+
+    }
+
+
+    public function delete_loginImage_by_id($loginImage_id)
+    {
+        $this -> db -> delete('t_loginImage', array('loginImage_id' => $loginImage_id));
+        return $this -> db -> affected_rows();
+
+    }
+
+
+
+    
+
     
 
 

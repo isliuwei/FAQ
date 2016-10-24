@@ -1427,10 +1427,451 @@ class Admin extends CI_Controller {
     {
         $result = $this -> admin_model -> get_carousel();
 
-        var_dump($result);
-        die();
+        $data = array(
+            'carousels' => $result
+        );
 
-        $this -> load -> view('admin/carousel-list');
+        $this -> load -> view('admin/carousel-list',$data);
+    }
+
+
+    public function add_carousel()
+    {
+
+        $this -> load -> view('admin/carousel-add');
+    }
+
+
+    public function save_carousel()
+    {
+        $carousel_name = $this -> input -> post('carousel_name',true);
+        $carousel_desc = $this -> input -> post('carousel_desc',true);
+
+        $this -> upload('carousel_url',"");
+        $carousel_url = $this -> upload('carousel_url',"");
+        $row = $this -> admin_model -> save_carousel_by_all($carousel_name,$carousel_desc,$carousel_url);
+
+
+
+        if( $row > 0 )
+        {
+
+            $data = array(
+                'info'=>'添加成功！',
+                'page' => '列表页面',
+                'url' => 'admin/carousel_mgr'
+            );
+            $this -> load -> view('redirect-null',$data);
+            
+        }
+
+
+
+
+
+
+
+
+    }
+
+
+    public function carousel_edit()
+    {
+        $id = $this -> uri -> segment(3);
+        $row = $this -> admin_model -> get_carousel_by_id($id);
+
+        if( $row )
+        {
+            $data = array(
+                'carousel' => $row
+            );
+
+            $this -> load -> view('admin/carousel-edit',$data);
+        }
+        
+
+        
+    }
+
+
+
+    public function updata_carousel()
+    {
+        
+      
+
+        $carousel_id = $this -> input -> post('carousel_id',true);
+        $carousel_name = $this -> input -> post('carousel_name',true);
+        $carousel_desc = $this -> input -> post('carousel_desc',true);
+        $photo_old_url = $this -> input -> post('photo_old_url',true);
+
+
+
+
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '3072';
+        $config['file_name'] = date("YmdHis") . '_' . rand(10000, 99999);
+
+        //图片上传操作
+        $this -> load -> library('upload', $config);
+        $this -> upload -> do_upload('carousel_url');
+        $upload_data = $this -> upload -> data();
+
+        if ( $upload_data['file_size'] > 0 ) {
+            //数据库中存photo的路径
+            $url = 'uploads/'.$upload_data['file_name'];
+        }else{
+            //如果不上传图片,则使用原来图片
+            $url = $photo_old_url;
+        }
+
+        
+
+
+        $row = $this -> admin_model -> update_carousel_by_all($carousel_id,$carousel_name,$carousel_desc,$url);
+
+
+        if( $row > 0)
+        {
+            $data = array(
+                'info'=>'信息更新成功！',
+                'page' => '信息页面',
+                'url' => 'admin/carousel_mgr'
+            );
+            $this -> load -> view('redirect-null',$data);
+        }
+        else
+        {
+            $data = array(
+                'info'=>'信息未修改！',
+                'page' => '信息编辑页面',
+                'url' => 'admin/carousel_edit/'.$carousel_id
+            );
+            $this -> load -> view('redirect-null',$data);
+        }
+
+
+
+    }
+
+
+
+    public function carousel_delete()
+    {
+
+
+
+        $carousel_id = $this -> input -> get('carousel_id');
+        $row = $this -> admin_model -> delete_carousel_by_id($carousel_id);
+        if( $row > 0 )
+        {
+            echo "success";
+        }
+        else
+        {
+            echo "fail";
+        }
+
+    }
+
+
+
+
+
+    public function aderImage_mgr()
+    {
+        $result = $this -> admin_model -> get_aderImage();
+
+        $data = array(
+            'aderImages' => $result
+        );
+
+        $this -> load -> view('admin/aderImage-list',$data);
+    }
+
+
+
+    public function add_aderImage()
+    {
+        $this -> load -> view('admin/aderImage-add');
+    }
+
+
+    
+
+
+
+
+    public function save_aderImage()
+    {
+        $aderImage_name = $this -> input -> post('aderImage_name',true);
+        $aderImage_desc = $this -> input -> post('aderImage_desc',true);
+
+        $this -> upload('aderImage_url',"");
+        $aderImage_url = $this -> upload('aderImage_url',"");
+        $row = $this -> admin_model -> save_aderImage_by_all($aderImage_name,$aderImage_desc,$aderImage_url);
+
+
+
+        if( $row > 0 )
+        {
+
+            $data = array(
+                'info'=>'添加成功！',
+                'page' => '列表页面',
+                'url' => 'admin/aderImage_mgr'
+            );
+            $this -> load -> view('redirect-null',$data);
+            
+        }
+
+
+    }
+
+
+    public function aderImage_edit()
+    {
+        $id = $this -> uri -> segment(3);
+        $row = $this -> admin_model -> get_aderImage_by_id($id);
+
+        if( $row )
+        {
+            $data = array(
+                'aderImage' => $row
+            );
+
+            $this -> load -> view('admin/aderImage-edit',$data);
+        }
+        
+
+        
+    }
+
+
+
+    public function updata_aderImage()
+    {
+
+
+        $aderImage_id = $this -> input -> post('aderImage_id',true);
+        $aderImage_name = $this -> input -> post('aderImage_name',true);
+        $aderImage_desc = $this -> input -> post('aderImage_desc',true);
+        $photo_old_url = $this -> input -> post('photo_old_url',true);
+
+
+
+
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '3072';
+        $config['file_name'] = date("YmdHis") . '_' . rand(10000, 99999);
+
+        //图片上传操作
+        $this -> load -> library('upload', $config);
+        $this -> upload -> do_upload('aderImage_url');
+        $upload_data = $this -> upload -> data();
+
+        if ( $upload_data['file_size'] > 0 ) {
+            //数据库中存photo的路径
+            $url = 'uploads/'.$upload_data['file_name'];
+        }else{
+            //如果不上传图片,则使用原来图片
+            $url = $photo_old_url;
+        }
+
+        
+
+
+        $row = $this -> admin_model -> update_aderImage_by_all($aderImage_id,$aderImage_name,$aderImage_desc,$url);
+
+
+        if( $row > 0)
+        {
+            $data = array(
+                'info'=>'信息更新成功！',
+                'page' => '信息页面',
+                'url' => 'admin/aderImage_mgr'
+            );
+            $this -> load -> view('redirect-null',$data);
+        }
+        else
+        {
+            $data = array(
+                'info'=>'信息未修改！',
+                'page' => '信息编辑页面',
+                'url' => 'admin/aderImage_edit/'.$aderImage_id
+            );
+            $this -> load -> view('redirect-null',$data);
+        }
+
+    }
+
+
+
+    public function aderImage_delete()
+    {
+
+
+
+        $aderImage_id = $this -> input -> get('aderImage_id');
+        $row = $this -> admin_model -> delete_aderImage_by_id($aderImage_id);
+        if( $row > 0 )
+        {
+            echo "success";
+        }
+        else
+        {
+            echo "fail";
+        }
+
+    }
+
+
+    public function loginImage_mgr()
+    {
+        $result = $this -> admin_model -> get_loginImage();
+
+        $data = array(
+            'loginImages' => $result
+        );
+
+        $this -> load -> view('admin/loginImage-list',$data);
+    }
+
+
+
+    public function add_loginImage()
+    {
+        $this -> load -> view('admin/loginImage-add');
+    }
+
+
+    public function save_loginImage()
+    {
+        $loginImage_name = $this -> input -> post('loginImage_name',true);
+        $loginImage_desc = $this -> input -> post('loginImage_desc',true);
+
+        $this -> upload('loginImage_url',"");
+        $loginImage_url = $this -> upload('loginImage_url',"");
+        $row = $this -> admin_model -> save_loginImage_by_all($loginImage_name,$loginImage_desc,$loginImage_url);
+
+
+
+        if( $row > 0 )
+        {
+
+            $data = array(
+                'info'=>'添加成功！',
+                'page' => '列表页面',
+                'url' => 'admin/loginImage_mgr'
+            );
+            $this -> load -> view('redirect-null',$data);
+            
+        }
+
+
+    }
+
+
+    public function loginImage_edit()
+    {
+        $id = $this -> uri -> segment(3);
+        $row = $this -> admin_model -> get_loginImage_by_id($id);
+
+        if( $row )
+        {
+            $data = array(
+                'loginImage' => $row
+            );
+
+            $this -> load -> view('admin/loginImage-edit',$data);
+        }
+        
+
+        
+    }
+
+
+
+    public function updata_loginImage()
+    {
+
+
+        $loginImage_id = $this -> input -> post('loginImage_id',true);
+        $loginImage_name = $this -> input -> post('loginImage_name',true);
+        $loginImage_desc = $this -> input -> post('loginImage_desc',true);
+        $photo_old_url = $this -> input -> post('photo_old_url',true);
+
+
+
+
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '3072';
+        $config['file_name'] = date("YmdHis") . '_' . rand(10000, 99999);
+
+        //图片上传操作
+        $this -> load -> library('upload', $config);
+        $this -> upload -> do_upload('loginImage_url');
+        $upload_data = $this -> upload -> data();
+
+        if ( $upload_data['file_size'] > 0 ) {
+            //数据库中存photo的路径
+            $url = 'uploads/'.$upload_data['file_name'];
+        }else{
+            //如果不上传图片,则使用原来图片
+            $url = $photo_old_url;
+        }
+
+        
+
+
+        $row = $this -> admin_model -> update_loginImage_by_all($loginImage_id,$loginImage_name,$loginImage_desc,$url);
+
+
+        if( $row > 0)
+        {
+            $data = array(
+                'info'=>'信息更新成功！',
+                'page' => '信息页面',
+                'url' => 'admin/loginImage_mgr'
+            );
+            $this -> load -> view('redirect-null',$data);
+        }
+        else
+        {
+            $data = array(
+                'info'=>'信息未修改！',
+                'page' => '信息编辑页面',
+                'url' => 'admin/loginImage_edit/'.$loginImage_id
+            );
+            $this -> load -> view('redirect-null',$data);
+        }
+
+    }
+
+
+
+    public function loginImage_delete()
+    {
+
+
+
+        $loginImage_id = $this -> input -> get('loginImage_id');
+        $row = $this -> admin_model -> delete_loginImage_by_id($loginImage_id);
+        if( $row > 0 )
+        {
+            echo "success";
+        }
+        else
+        {
+            echo "fail";
+        }
+
     }
 
 

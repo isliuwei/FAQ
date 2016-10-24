@@ -46,14 +46,14 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页轮播图管理界面</strong> / <small>Carousel</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> 登录窗口图片管理界面</strong> / <small>LoginImage</small></div>
     </div>
 
     <div class="am-g am-add">
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs">
-            <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span><a href="admin/add_carousel"> 新增</a></button>
+            <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span><a href="admin/add_loginImage"> 新增</a></button>
           </div>
         </div>
       </div>
@@ -66,27 +66,27 @@
               <tr>
                 <th class="table-check"><input type="checkbox" /></th>
                 <th class="table-id">ID</th>
-                <th class="table-title">轮播图主题</th>
-                <th class="table-title">轮播图描述</th>
-                <th class="table-type">轮播图缩略图</th>
+                <th class="table-title">登录窗口图片主题</th>
+                <th class="table-title">登录窗口图片描述</th>
+                <th class="table-type">登录窗口图片缩略图</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
           <tbody id="tbody">
           <?php
-            foreach($carousels as $car){
+            foreach($loginImages as $img){
           ?>
               <tr>
                 <td><input type="checkbox" /></td>
-                <td><?php echo $car -> carousel_id; ?></td>
-                <td><?php echo $car -> carousel_name; ?></td>
-                <td><?php echo $car -> carousel_desc; ?></td>
-                <td><img class="am-circle" src="<?php echo $car -> carousel_url; ?>" width="50px" height="50px" alt="<?php echo $car -> carousel_url;?>" /></td>
-                <td selector="<?php $car -> carousel_id; ?>">
+                <td><?php echo $img -> loginImage_id; ?></td>
+                <td><?php echo $img -> loginImage_name; ?></td>
+                <td><?php echo $img -> loginImage_desc; ?></td>
+                <td><img class="am-circle" src="<?php echo $img -> loginImage_url; ?>" width="50px" height="50px" alt="<?php echo $img -> loginImage_url;?>" /></td>
+                <td selector="<?php $img -> loginImage_id; ?>">
                   <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ><span class="am-icon-pencil-square-o"></span><a href="admin/carousel_edit/<?php echo $car -> carousel_id; ?>"> 编辑</a></button>
-                      <button class="am-btn am-btn-default am-btn-delete am-btn-xs am-text-secondary" data-id="<?php echo $car -> carousel_id; ?>" ><span class="am-icon-trash-o"></span> 删除</button>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ><span class="am-icon-pencil-square-o"></span><a href="admin/loginImage_edit/<?php echo $img -> loginImage_id; ?>"> 编辑</a></button>
+                      <button class="am-btn am-btn-default am-btn-delete am-btn-xs am-text-secondary" data-id="<?php echo $img -> loginImage_id; ?>" ><span class="am-icon-trash-o"></span> 删除</button>
                     </div>
                   </div>
                 </td>
@@ -156,12 +156,12 @@
     $(function(){
         $('#tbody').on('click','.am-btn-delete', function(){
         	
-            var $carousel_id = $(this).data('id');
-            var $tr = $('tr[selector='+$carousel_id+']');
+            var $loginImage_id = $(this).data('id');
+            var $tr = $('tr[selector='+$loginImage_id+']');
             
 
             
-            $.get('admin/carousel_delete',{'carousel_id':$carousel_id},function(res){
+            $.get('admin/loginImage_delete',{'loginImage_id':$loginImage_id},function(res){
                 if(res=='success'){
                     $tr.remove();
                     $('#alert').trigger('click');
