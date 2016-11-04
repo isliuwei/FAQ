@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #filter{
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #f00;
+            padding: 0 10px;
+        }
+        #input{
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h3>* 关闭输入法</h3>
+<pre>关于imeMode <a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/ime-mode" target="_blank">请点击此处</a></pre>
+<div id="filter">
+    <input id="input" type="text">
+    <input class="input" type="text">
+    <input class="input" type="text">
+</div>
+
+<script>
+    window.onload = function(){
+        var oInput = document.querySelector('#input');
+        var oInput1 = document.querySelectorAll('.input');
+
+        /**
+         * 关闭输入法(只支持FireFox)
+         * @param nodeList
+         *
+         */
+
+        var banInputMethod = function(nodeList){
+            var nodeListArr = [];
+
+            if(nodeList.length){//类数组转换成数组
+                nodeListArr = [...nodeList];
+                //nodeListArr = Array.from(nodeList);
+                //nodeListArr = Array.prototype.slice.call(nodeList);
+            }else{
+                nodeList.style.imeMode = 'disabled';
+            }
+
+            nodeListArr.forEach(function(item,index,array){
+                item.addEventListener('focus',function(){
+                    this.style.imeMode = 'disabled';
+                },false);
+            });
+
+        };
+
+
+        var clearChinese = function(){
+            return xx.replace(/[\u4e00-\u9fa5]/g,"");
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    };
+
+</script>
+
+</body>
+</html>

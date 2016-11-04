@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #filter{
+            width: 230px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #f00;
+            padding: 0 10px;
+        }
+        #input{
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h3>* 验证用户是否输入</h3>
+<div id="filter">
+    <input id="input" type="text"><button id="btn">验证是否为空</button>
+</div>
+
+<script>
+    window.onload = function(){
+
+        var oInput = document.getElementById('input');
+        var oBtn = document.getElementById('btn');
+
+
+        var isEmpty = function(chars){
+            return chars.length === 0?true:false;
+        };
+
+        var myTrim = function(chars){
+            return chars.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"");
+        };
+
+
+
+        oBtn.addEventListener('click',function(){
+            var trimValue = myTrim(oInput.value);
+            if(isEmpty(trimValue)){
+                alert('输入为空');
+            }else{
+                alert('输入不为空');
+            }
+        },false);
+
+    };
+
+
+
+</script>
+
+</body>
+</html>

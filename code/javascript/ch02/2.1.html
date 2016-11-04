@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #filter{
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #f00;
+            padding: 0 10px;
+        }
+        #input{
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3>* 去除字符串左右两边的空格</h3>
+    <div id="filter">
+        <input id="input" type="text"><button id="btn">过滤</button>
+    </div>
+
+    <script>
+        window.onload = function(){
+            var oInput = document.getElementById('input');
+            var oBtn = document.getElementById('btn');
+
+            oBtn.addEventListener('click',function(){
+                oInput.value = oInput.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"");
+            },false);
+        };
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            width: 240px;
+            height: 120px;
+            border: 1px solid #f00;
+            padding: 20px 10px;
+        }
+        .inputBox{
+            display: block;
+            margin: 10px 0px 0px 20px;
+        }
+        .inputBox:first-child{
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h3>* 禁止输入 使用input的属性</h3>
+    <div class="container">
+        <input class="inputBox" placeholder="normal" type="text">
+        <input class="inputBox" placeholder="disable" type="text" disabled>
+        <input class="inputBox" placeholder='disabled="disabled"' type="text" disabled="disabled">
+        <input class="inputBox" placeholder="readonly" type="text" readonly>
+    </div>
+
+
+    <h3>* 禁止输入 使用JavaScript实现</h3>
+    <div class="container">
+        <input class="inputBox" placeholder="normal" type="text">
+        <input class="inputBox" id="input1" type="text">
+        <input class="inputBox" id="input2" type="text">
+
+    </div>
+
+    <script>
+        window.onload = function(){
+            var oInput1 = document.getElementById('input1');
+            var oInput2 = document.getElementById('input2');
+
+
+            oInput1.onfocus = function(){//控制失去焦点
+                this.blur();
+            };
+
+
+            oInput2.onkeyup = function(){//当鼠标输入焦点的时候将值置空
+                this.onblur = function(){
+                    this.value = "";
+                };
+            };
+        };
+    </script>
+
+</body>
+</html>
