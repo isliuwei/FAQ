@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>设备管理</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/font-awesome.min.css" />
+    <style>
+      .operation{
+        margin: 20px 0px;
+      }
+      .tip{
+        border-left: 3px solid #d9534f;
+      }
+      .hidden{
+        display: none;
+      }
+      .cha p{
+        font-size: 12px;
+      }
+
+    </style>
+  </head>
+  <body>
+
+
+<div class="jumbotron">
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2>&nbsp;&nbsp;<i class="fa fa-desktop"></i>&nbsp;&nbsp;Devices Management</h2>
+        <blockquote class="tip">
+          <p><i class="fa fa-tags"></i> Operating System Devices Management Experiment Demonstration</p>
+        </blockquote>
+
+        <div class="operation">
+
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addDev"><i class="fa fa-plus"></i> 添加设备</button>
+
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delDev"><i class="fa fa-trash"></i> 删除设备</button>
+
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#appDev"><i class="fa fa-certificate"></i> 申请设备</button>
+
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#relDev"><i class="fa fa-refresh"></i> 释放设备</button>
+
+        </div>
+
+
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">设备控制器表 <span class="label label-success">DCT</span></div>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>设备标识符</th>
+              <th>设备名</th>
+              <th>设备类型(I/O)</th>
+              <th>设备状态(0/1)</th>
+              <th>连接控制器名</th>
+              <th>当前运行进程</th>
+              <th>进程阻塞队列</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <%
+              DevArr.forEach(function(item,index,array){
+            %>
+            <tr class="center">
+              <td><%= (index+1) %></td>
+              <td><%=  item.devName %></td>
+              <td><%=  item.devType %></td>
+              <td><%=  item.Status %></td>
+              <td><%=  item.devCol %></td>
+              <td><%=  item.devQue[0] %></td>
+              <td>
+                <%
+                  var html='';
+                  for(var i=1; i<item.devQue.length; i++){
+                    html+=item.devQue[i] + " -> ";
+                  }
+                %>
+                <%= html %>
+              </td>
+            </tr>
+            <%
+              })
+            %>
+
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">控制器控制表 <span class="label label-warning">COCT</span></div>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>控制器标识符</th>
+              <th>控制器名</th>
+              <th>设备状态(0/1)</th>
+              <th>连接通道名</th>
+              <!--<th>当前运行进程</th>-->
+              <th>进程阻塞队列</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <%
+              ColArr.forEach(function(item,index,array){
+            %>
+            <tr class="center">
+              <td><%= (index+1) %></td>
+              <td><%=  item.colName %></td>
+              <td><%=  item.Status %></td>
+              <td><%=  item.colCha %></td>
+              <td><%=  item.colQue %></td>
+              <!--<td>空</td>-->
+            </tr>
+            <%
+              })
+            %>
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">通道控制表 <span class="label label-primary">CHCT</span></div>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>通道标识符</th>
+              <th>通道名</th>
+              <th>设备状态(0/1)</th>
+              <!--<th>当前运行进程</th>-->
+              <th>进程阻塞队列</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <%
+              ChaArr.forEach(function(item,index,array){
+            %>
+            <tr class="center">
+              <td><%= (index+1) %></td>
+              <td><%=  item.chaName %></td>
+              <td><%=  item.Status %></td>
+              <td><%=  item.chaQue %></td>
+              <!--<td>空</td>-->
+            </tr>
+            <%
+              })
+            %>
+
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+      </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+  <div class="modal fade" id="addDev" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">设备信息</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" method="post" role="form" action="/addDev" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+              <label for="devName" class="col-sm-3 control-label">设备名称</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="devName" name="devName" placeholder="请输入设备名称" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="devType" class="col-sm-3 control-label">设备类型(I/O)</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="devType" name="devType" placeholder="请输入设备类型" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="devController" class="col-sm-3 control-label">设备控制器名</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="devController" name="devCol" placeholder="请输入设备控制器名" required>
+              </div>
+            </div>
+
+            <blockquote class="tip hidden cha col-sm-offset-3">
+              <!--<p>控制器不存在,请输入对应的通道名</p>-->
+              <span class="label label-danger hidden cha">控制器不存在,请输入对应的通道名</span>
+            </blockquote>
+
+
+
+            <div class="form-group hidden cha">
+
+              <label for="colCha" class="col-sm-3 control-label">通道名</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="colCha" name="colCha" placeholder="请输入通道名">
+              </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="modal fade" id="delDev" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">删除设备</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" action="/delDev" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+              <label for="devName" class="col-sm-3 control-label">设备名称</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="devName" name="devName" placeholder="请输入设备名称">
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="modal fade" id="appDev" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">申请设备</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form" action="/appDev" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+              <label for="procName" class="col-sm-3 control-label">进程名称</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="procName" name="procName" placeholder="请输入进程名称" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="devName" class="col-sm-3 control-label">设备名称</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="devName" name="devName" placeholder="请输入设备名称" required>
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="modal fade" id="relDev" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">释放设备</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" action="/relDev" role="form" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+              <label for="devName" class="col-sm-3 control-label">设备名称</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="devName" name="devName" placeholder="请输入设备名称">
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="/javascripts/jquery-1.11.3.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <script>
+    $('#devController').on('blur',function(){
+      var devCol = $(this).val();
+      $.get('/checkCol',{devCol: devCol},function(res){
+        //alert(res);
+        if(res === 'fail'){
+          $('.cha').removeClass('hidden');
+        }else{
+          return;
+        }
+      },'text');
+    });
+
+  </script>
+  </body>
+</html>
