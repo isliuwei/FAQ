@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>orderBar</title>
+	<style>
+		#orderBar{
+
+			position: fixed;
+			bottom: 100px;
+			right: 100px;
+
+		}
+
+		#orderBar .orderBtn{
+			width: 80px;
+			height: 80px;
+			font-size: 28px;
+			text-align: center;
+			padding: 2px;
+			border: 1px solid #f00;
+			position: absolute;
+			left: 421px;
+		}
+		#orderBar .orderTitle{
+
+		}
+
+		#orderBar .orderClose{
+			display: inline-block;
+			float: right;
+			padding-right: 10px;
+			font-size: 12px;
+
+
+		}
+
+		#orderBar .orderTopic{
+			text-align: center;
+		}
+
+		#orderBar .orderForm{
+			text-align: center;
+			width: 400px;
+			padding: 0 10px;
+			border: 1px solid #f00;
+			position: relative;
+		}
+		#orderBar .orderForm label{
+			display: inline-block;
+			width: 80px;
+		}
+		#orderBar .orderForm .inputBox{
+			width: 200px;
+			height: 30px;
+			margin-bottom: 10px;
+			text-indent: 10px;
+		}
+		#orderBar .orderForm .textareaBox{
+			padding: 10px 6px;
+			text-indent: 10px;
+		}
+		#orderBar .orderForm .submitBtn{
+			width: 100px;
+			height: 40px;
+			margin: 10px 0;
+			border-radius: 5px;
+			-webkit-appearance: none;
+			outline: none;
+			border: none;
+			color: #fff;
+			background: rgb(66,165,230);
+			font-size: 14px;
+
+		}
+
+		#orderBar .hidden{
+			visibility: hidden;
+		}
+		#orderBar .orderTipBar{
+			width: 16px;
+			height: 100px;
+			font-size: 16px;
+			border: 1px solid #f00;
+			position: absolute;
+			top: -1px;
+			left: 420px;
+
+		}
+	</style>
+</head>
+<body>
+
+<div id="orderBar">
+	<div class="orderBtn">
+		<span class="orderTitle">点我预约</span>
+	</div>
+	<div class="orderForm">
+		<h3 class="orderTopic">填写预约信息<span class="orderClose">关闭</span></h3>
+		<form action="#">
+			<label for="name">预约姓名</label>
+			<input id="name" class="inputBox" type="text" placeholder="填写预约姓名">
+			<br>	
+			<label for="tel">预约电话</label>
+			<input id="tel" class="inputBox" type="text" placeholder="* 填写预约电话(必填)" required>
+			<br>
+			<label for="address">预约地址</label>
+			<input id="address" class="inputBox" type="text" placeholder="填写预约地址">
+			<br>
+			<label for="address" class="hidden">预约信息</label>
+			
+			<!-- <input id="address" class="inputBox" type="text"> -->
+			<textarea name="" class="textareaBox" cols="30" rows="4" placeholder="填写预约信息"></textarea>
+			<br>
+			<input class="submitBtn" type="submit" value="提交预约">
+		</form>
+		<!-- <div class="orderTipBar">预约信息填写</div> -->
+	</div>
+	
+</div>
+	
+</body>
+</html>
