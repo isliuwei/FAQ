@@ -94,6 +94,35 @@
 
 	$smarty -> assign('json',$json);
 
+	$smarty -> assign('nowTime',time());
+
+	$smarty -> assign('testStr','abcdefg');
+
+	$smarty -> assign('utime',time());
+
+	// 如何在模板中运用php的内置函数
+	// {%变量|php内置函数:参数2:参数3%} 
+	// 使用registerPlugin 方法注册自定义函数
+	// {%函数名 参数1=参数1值 参数2=参数2值 参数3=参数3值%}
+
+	//自定义函数
+	function testFn($params){
+		echo "<pre>";
+		//var_dump($params);
+		print_r($params);
+		echo "</pre>";
+		$p1 = $params['p1'];
+		$p2 = $params['p2'];
+		return '传入的参数1值为'.$p1.', 传入的参数2的值为'.$p2;
+	}
+
+	//注册函数
+	$smarty -> registerPlugin('function','testFn','testFn');
+
+
+
+
+
 
 
 

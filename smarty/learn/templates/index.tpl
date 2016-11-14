@@ -136,6 +136,17 @@ price: {%$book.price%}
 <br>
 <ul id="list"></ul>
 
+{%"Y-m-d"|date:$nowTime%}
+<br>
+{%'a'|str_replace:'A':$testStr%}
+<br>
+{%testFn p1='abc' p2='edf'%}
+<br>
+{%test width=20 height=30%}
+<br>
+{%$utime|test:'Y-m-d H:i:s'%}
+<br>
+<div id="timeArea"></div>
 <script>
 var jsonData = {%$json%};
 var listStr = "";
@@ -144,6 +155,20 @@ jsonData.forEach(function(item,index,array){
 	listStr+='<li>'+item.name+' / $'+item.price+'</li>';
 });
 oUl.innerHTML = listStr;
+
+
+	
+var oDiv = document.querySelector('#timeArea');
+
+var fn = function(){
+	//var time = new Date();
+	
+	oDiv.innerHTML = time;
+}
+setInterval(function(){
+	fn();
+}, 500);
+
 
 </script>
 </body>

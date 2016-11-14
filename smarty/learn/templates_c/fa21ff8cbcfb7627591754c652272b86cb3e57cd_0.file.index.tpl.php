@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-11-09 18:26:43
+/* Smarty version 3.1.29, created on 2016-11-14 11:40:04
   from "/Applications/XAMPP/xamppfiles/htdocs/smarty/learn/templates/index.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_58235c53706513_52526395',
+  'unifunc' => 'content_5829948418d8a7_57545300',
   'file_dependency' => 
   array (
     'fa21ff8cbcfb7627591754c652272b86cb3e57cd' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/smarty/learn/templates/index.tpl',
-      1 => 1478712400,
+      1 => 1479120001,
       2 => 'file',
     ),
   ),
@@ -20,10 +20,12 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:header.tpl' => 1,
   ),
 ),false)) {
-function content_58235c53706513_52526395 ($_smarty_tpl) {
+function content_5829948418d8a7_57545300 ($_smarty_tpl) {
 if (!is_callable('smarty_modifier_capitalize')) require_once '/Applications/XAMPP/xamppfiles/htdocs/smarty/libs/smarty/plugins/modifier.capitalize.php';
 if (!is_callable('smarty_modifier_date_format')) require_once '/Applications/XAMPP/xamppfiles/htdocs/smarty/libs/smarty/plugins/modifier.date_format.php';
 if (!is_callable('smarty_modifier_truncate')) require_once '/Applications/XAMPP/xamppfiles/htdocs/smarty/libs/smarty/plugins/modifier.truncate.php';
+if (!is_callable('smarty_function_test')) require_once '/Applications/XAMPP/xamppfiles/htdocs/smarty/libs/smarty/plugins/function.test.php';
+if (!is_callable('smarty_modifier_test')) require_once '/Applications/XAMPP/xamppfiles/htdocs/smarty/libs/smarty/plugins/modifier.test.php';
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('filename'=>"index.tpl"), 0, false);
 ?>
 
@@ -265,6 +267,22 @@ $_smarty_tpl->tpl_vars['book'] = $__foreach_book_2_saved_item;
 <br>
 <ul id="list"></ul>
 
+<?php echo date("Y-m-d",$_smarty_tpl->tpl_vars['nowTime']->value);?>
+
+<br>
+<?php echo str_replace('a','A',$_smarty_tpl->tpl_vars['testStr']->value);?>
+
+<br>
+<?php echo testFn(array('p1'=>'abc','p2'=>'edf'),$_smarty_tpl);?>
+
+<br>
+<?php echo smarty_function_test(array('width'=>20,'height'=>30),$_smarty_tpl);?>
+
+<br>
+<?php echo smarty_modifier_test($_smarty_tpl->tpl_vars['utime']->value,'Y-m-d H:i:s');?>
+
+<br>
+<div id="timeArea"></div>
 <?php echo '<script'; ?>
 >
 var jsonData = <?php echo $_smarty_tpl->tpl_vars['json']->value;?>
@@ -275,6 +293,21 @@ jsonData.forEach(function(item,index,array){
 	listStr+='<li>'+item.name+' / $'+item.price+'</li>';
 });
 oUl.innerHTML = listStr;
+
+
+	
+var oDiv = document.querySelector('#timeArea');
+
+var fn = function(){
+	//var time = new Date();
+	var time = "'"+<?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['time']->value);?>
++"'";
+	oDiv.innerHTML = time;
+}
+setInterval(function(){
+	fn();
+}, 500);
+
 
 <?php echo '</script'; ?>
 >
